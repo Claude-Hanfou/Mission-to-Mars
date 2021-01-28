@@ -10,12 +10,12 @@ from webdriver_manager.chrome import ChromeDriverManager
 def init_browser():
     # @NOTE: Replace the path with your actual path to the chromedriver
     executable_path = {'executable_path': ChromeDriverManager().install()}
-    browser = Browser('chrome', **executable_path, headless=False)
+    return Browser('chrome', **executable_path, headless=False)
 
 
 def scrape():
     browser = init_browser()
-    mars_info= {}
+    mars= {}
 
 
 
@@ -36,8 +36,8 @@ def scrape():
     news_p = title.find('div', class_='rollover_description_inner').text
 
     #Store in main dictionary
-    mars_info['news_title'] = news_title
-    mars_info['news_paragraph'] = news_p
+    mars['news_title'] = news_title
+    mars['news_paragraph'] = news_p
     
 
     
@@ -48,14 +48,17 @@ def scrape():
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
    
-
-    tables = pd.read_html(url2)
-    df = tables[0]
-    df.columns = ['Mars Planet Profile', 'Info']
-    df.head()
-
+    grab=pd.read_html(url2)
+    mars_data=pd.DataFrame(grab[0])
+    mars_data.columns=['Mars','Data']
+    mars_table=mars_data.set_index("Mars")
+    marsdata = mars_table.to_html(classes='marsdata')
+    marsdata=marsdata.replace('\n', ' ')
+    marsdata
     #store in main dictionary
-    mars_info['table'] = df
+    mars['marsdata'] = marsdata
+
+
 
     #get the image
     url3 = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
@@ -81,7 +84,11 @@ def scrape():
         hemisphere_image_urls.append(dictionary)
         browser.back()
     #store in main dictionary
-    mars_info['hemispher_image_urls] = hemisphere_image_urls
+    mars['hemispher_image_urls'] = hemisphere_image_urls
 
 
-    return mars_info
+    # Close the browser after scraping
+    browser.quit()
+
+    #return mars
+    return mars
