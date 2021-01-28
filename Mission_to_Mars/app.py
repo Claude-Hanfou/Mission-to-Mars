@@ -20,6 +20,7 @@ def index():
 
 @app.route("/scrape")
 def scrape():
+    
     mars_data = scrape_mars.scrape_info()
     # Update the Mongo database using update and upsert=True
     mongo.db.collection.update({}, mars_data, upsert=True)
