@@ -42,13 +42,13 @@ def scrape():
 
     
     #get the table information
-    url2= 'https://space-facts.com/mars/'
-    browser.visit(url2)
+    url= 'https://space-facts.com/mars/'
+    browser.visit(url)
 
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
    
-    grab=pd.read_html(url2)
+    grab=pd.read_html(url)
     mars_data=pd.DataFrame(grab[0])
     mars_data.columns=['Mars','Data']
     mars_table=mars_data.set_index("Mars")
@@ -61,9 +61,9 @@ def scrape():
 
 
     #get the image
-    url3 = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
+    url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
     # Retrieve page with the requests module
-    browser.visit(url3)
+    browser.visit(url)
     html = browser.html
 
     # Create BeautifulSoup object; parse with 'html.parser'
@@ -83,7 +83,8 @@ def scrape():
         dictionary={"title": title , "img_url":image}
         hemisphere_image_urls.append(dictionary)
         browser.back()
-    #store in main dictionary
+
+        #store in main dictionary
     mars['hemispher_image_urls'] = hemisphere_image_urls
 
 
@@ -92,3 +93,4 @@ def scrape():
 
     #return mars
     return mars
+ 
