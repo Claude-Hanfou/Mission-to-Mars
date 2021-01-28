@@ -1,6 +1,7 @@
 # Dependencies
 from bs4 import BeautifulSoup
 import requests
+import time
 from splinter import Browser
 import pandas as pd
 from webdriver_manager.chrome import ChromeDriverManager
@@ -19,7 +20,7 @@ def scrape():
 
 
     #Start with the paragraph and the title_container
-    url = "https://raleigh.craigslist.org/search/hhh?max_price=1500&availabilityMode=0"
+    url = 'https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest'
     browser.visit(url)
 
     html = browser.html
@@ -34,15 +35,14 @@ def scrape():
     #get the paragraph info
     news_p = title.find('div', class_='rollover_description_inner').text
 
-    #Store in main dict
+    #Store in main dictionary
     mars_info['news_title'] = news_title
     mars_info['news_paragraph'] = news_p
     
-    return mars_info
 
     
-    #get the table ingormation
-    url = "https://space-facts.com/mars/'
+    #get the table information
+    url2= 'https://space-facts.com/mars/'
     browser.visit(url2)
 
     html = browser.html
@@ -51,3 +51,37 @@ def scrape():
 
     tables = pd.read_html(url2)
     df = tables[0]
+    df.columns = ['Mars Planet Profile', 'Info']
+    df.head()
+
+    #store in main dictionary
+    mars_info['table'] = df
+
+    #get the image
+    url3 = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
+    # Retrieve page with the requests module
+    browser.visit(url3)
+    html = browser.html
+
+    # Create BeautifulSoup object; parse with 'html.parser'
+    soup = BeautifulSoup(html, 'html.parser')
+
+    hemisphere_image_urls = []
+    #Create forloop for image and title
+    for i in range (4):
+        time.sleep(5)
+        header=browser.find_by_tag('h3')
+        header[i].click()
+        html = browser.html
+        soup = BeautifulSoup(html, 'html.parser')
+        link= soup.find('img', class_ ='wide-image')['src']
+        title=soup.find('h2', class_='title').text
+        image= 'https://astrogeology.usgs.gov/' + link
+        dictionary={"title": title , "img_url":image}
+        hemisphere_image_urls.append(dictionary)
+        browser.back()
+    #store in main dictionary
+    mars_info['hemispher_image_urls] = hemisphere_image_urls
+
+
+    return mars_info
