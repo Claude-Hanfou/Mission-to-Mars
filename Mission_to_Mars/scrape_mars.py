@@ -94,8 +94,6 @@ def scrape():
 
         #store in main dictionary
     mars_dict['hemispher_image_urls'] = hemisphere_image_urls
-    for hemi in hemisphere_image_urls:
-        print(hemi.img_url)
 
     print(mars_dict)
     # Close the browser after scraping
