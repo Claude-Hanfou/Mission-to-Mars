@@ -25,7 +25,7 @@
     <div class="row" id="mars-info">
       <div class="col-md-12">
         <h1 style="font-weight:bold" >Latest Mars News</h1> 
-        <h2 class="heading">{{mars.news_title}}</h2> 
+        <h2 style="font-weight:bold;font-size: 12px;">{{mars.news_title}}</h2> 
         <p>{{mars.news_p}}</p> 
       </div>
     </div>
@@ -39,18 +39,24 @@
     <!--Pictures title-->
   
 
-    <div>
-      <ul style="list-style: none;">
+    <section id="lower" class="">
+      <div class="row mt-5">
+          <div class="col-md-12 text-center">
+              <h2>Mars Hemispheres</h2><hr>
+          </div>
 
-        <!-- Loop through the dictionary -->
-        {% for item in hemisphere_image_urls %}
+      {% for hemi in hemisphere_image_urls %}
+      <div class="col-md-6">
+          <figure class="figure">
+              <img class="figure-img img-fluid my-1" src="{{ hemi.img_url }}">
+              <figcaption class="figure-caption"><h4>{{ hemi.title }}</h4></figcaption>
+          </figure>
+      </div>
+      {% endfor %}
+  </section>
 
-          <li><img src="{{item.img_url}}" alt="Cerberus"></li>
-          <li>{{item.title}}</li>
-
-        {% endfor %}
-      </ul>
-    </div>
+    
+    
 
 
   
