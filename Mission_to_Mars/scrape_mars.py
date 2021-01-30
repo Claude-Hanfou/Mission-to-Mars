@@ -93,7 +93,7 @@ def scrape():
         browser.back()
 
         #store in main dictionary
-    mars_dict['hemispher_image_urls'] = hemisphere_image_urls
+    mars_dict['hemisphere_image_urls'] = hemisphere_image_urls
 
     print(mars_dict)
     # Close the browser after scraping

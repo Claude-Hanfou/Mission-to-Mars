@@ -25,42 +25,29 @@
     <div class="row" id="mars-info">
       <div class="col-md-12">
         <h1 style="font-weight:bold" >Latest Mars News</h1> 
-        <h2 style="font-weight:bold;font-size: 12px;">{{mars.news_title}}</h2> 
+        <h2 style="font-weight:bold;font-size: 15px;">{{mars.news_title}}</h2> 
         <p>{{mars.news_p}}</p> 
       </div>
     </div>
     
     <!--Table into-->
-    <div class="col-md-4">
-      <h2>Mars Facts</h2>
+    
+    <div class="col-md-12">
+      <h3 style="font-weight:bold;font-size: 12px">Mars Facts</h3>
        {{mars.marsdata | safe}}
+       <br>
     </div>
 
     <!--Pictures title-->
-  
-
-    <section id="lower" class="">
-      <div class="row mt-5">
-          <div class="col-md-12 text-center">
-              <h2>Mars Hemispheres</h2><hr>
-          </div>
-
-      {% for hemi in hemisphere_image_urls %}
+      {% for hemi in mars.hemisphere_image_urls %}
       <div class="col-md-6">
           <figure class="figure">
-              <img class="figure-img img-fluid my-1" src="{{ hemi.img_url }}">
+              <img class= "figure-img img-fluid rounded" src="{{ hemi.img_url }}"" style="width:500px;height:400px;border:0;">
               <figcaption class="figure-caption"><h4>{{ hemi.title }}</h4></figcaption>
           </figure>
       </div>
       {% endfor %}
-  </section>
-
     
-    
-
-
   
-
- 
 </body>
 </html>
