@@ -36,6 +36,21 @@
        {{mars.marsdata | safe}}
     </div>
 
+    <!--Pictures title-->
+  
+
+    <div>
+      <ul style="list-style: none;">
+
+        <!-- Loop through the dictionary -->
+        {% for item in hemisphere_image_urls %}
+
+          <li><img src="{{item.img_url}}" alt="Cerberus"></li>
+          <li>{{item.title}}</li>
+
+        {% endfor %}
+      </ul>
+    </div>
 
 
   
