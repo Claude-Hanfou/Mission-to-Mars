@@ -13,17 +13,43 @@
   <div class="container">
 
     <div class="jumbotron text-center">
-      <h1>{{mars.news_title}}</h1>
-      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">test!</a></p>
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scape New Data</a></p>
     </div>
 
     <!-- Mars info-->
     <div class="row" id="mars-info">
       <div class="col-md-12">
-        <h4 class="heading">{{mars.news_title}}</h4> 
+        <p style="font-weight:bold" >Latest Mars News</p> 
+        <p class="heading">{{mars.news_title}}</p> 
+        <p class="heading">{{mars.news_p}}</p> 
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <section class="chart_page">
+                  <h1 id="sum-h1">Featured Mars Image</h1>
+                  <img id="image" src={{mars.image}} class="pull-left img-responsive img-rounded"  alt="Mars_image"/>
+              </section>
+          </div>
+
+      </div>
+    </div>
+    <div class="container text-center">
+      <div>
+        <ul style="list-style: none;">
+  
+          {% for item in hemisphere_image_urls %}
+          <li><img src="{{item.image_url}}"></div>li>
+
+          {% endfor %}
+            
+        
+        </ul>
       </div>
     </div>
 
-  </div>
+
 </body>
 </html>

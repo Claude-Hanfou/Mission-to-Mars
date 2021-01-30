@@ -15,7 +15,7 @@ def init_browser():
 
 def scrape():
     browser = init_browser()
-    mars= {}
+    mars_dict= {}
 
 
 
@@ -26,18 +26,26 @@ def scrape():
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
 
+    item_list=soup.find_all("ul",class_="item_list")
+    for item in item_list:
+        slide=item.find_all("li",class_="slide")[0]
+        mars_dict["news_p"] = slide.find('div', class_='rollover_description_inner').text.strip()  
+        mars_dict["news_title"]=slide.h3.text
+        
+
     #news title
-    news_title = soup.find('ul', class_='item_list')
-    title = news_title.find('li', class_='slide') 
-    bottom= title.find('div', class_='bottom_gradient')
-    news_title = bottom.find('h3').text   
+    #news_title = soup.find('ul', class_='item_list')  
+    #title = news_title.find('li', class_='slide') 
+    #bottom= title.find('div', class_='bottom_gradient')
+    #news_title = bottom.find('h3').text 
+   
 
     #get the paragraph info
-    news_p = title.find('div', class_='rollover_description_inner').text
+    #news_p = title.find('div', class_='rollover_description_inner').text
 
     #Store in main dictionary
-    mars['news_title'] = news_title
-    mars['news_paragraph'] = news_p
+    #['news_title'] = news_title
+   # mars['news_paragraph'] = news_p
     
 
     
@@ -56,8 +64,8 @@ def scrape():
     marsdata=marsdata.replace('\n', ' ')
     marsdata
     #store in main dictionary
-    mars['marsdata'] = marsdata
-
+    mars_dict['marsdata'] = marsdata
+    
 
 
     #get the image
@@ -85,12 +93,11 @@ def scrape():
         browser.back()
 
         #store in main dictionary
-    mars['hemispher_image_urls'] = hemisphere_image_urls
-
-
+    mars_dict['hemispher_image_urls'] = hemisphere_image_urls
+    print(mars_dict)
     # Close the browser after scraping
     browser.quit()
 
     #return mars
-    return mars
- 
+    return mars_dict
+#scrape()
