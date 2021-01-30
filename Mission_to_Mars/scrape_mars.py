@@ -58,8 +58,8 @@ def scrape():
    
     grab=pd.read_html(url)
     mars_data=pd.DataFrame(grab[0])
-    mars_data.columns=['Mars','Data']
-    mars_table=mars_data.set_index("Mars")
+    mars_data.columns=['Description','Mars']
+    mars_table=mars_data.set_index("Description")
     marsdata = mars_table.to_html(classes='marsdata')
     marsdata=marsdata.replace('\n', ' ')
     marsdata
