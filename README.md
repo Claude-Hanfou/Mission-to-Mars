@@ -12,4 +12,6 @@ The following HTML were used to scrape the data
 
 ### Scraping
 
+The Jupyter Notebook file called mission_to_mars.ipynb was used to complete all of the scraping and analysis tasks. The latest News Title and Paragraph Text were collected from the first url
+
 ### - MongoDB and Flask Application
