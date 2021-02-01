@@ -31,22 +31,22 @@ def scrape():
         slide=item.find_all("li",class_="slide")[0]
         mars_dict["news_p"] = slide.find('div', class_='rollover_description_inner').text.strip()  
         mars_dict["news_title"]=slide.h3.text
-        
-
-    #news title
-    #news_title = soup.find('ul', class_='item_list')  
-    #title = news_title.find('li', class_='slide') 
-    #bottom= title.find('div', class_='bottom_gradient')
-    #news_title = bottom.find('h3').text 
-   
-
-    #get the paragraph info
-    #news_p = title.find('div', class_='rollover_description_inner').text
-
-    #Store in main dictionary
-    #['news_title'] = news_title
-   # mars['news_paragraph'] = news_p
     
+
+
+    #Featured image
+    url='https://www.jpl.nasa.gov/images/spring-sprouts-on-mars/'    
+    browser.visit(url)
+
+    html = browser.html
+    soup = BeautifulSoup(html, "html.parser")
+
+    image = soup.find('div', class_='relative bg-black border border-black')
+    for item in image:
+        mars_dict["featured_image"]= item.find('img')['src']
+    
+
+
 
     
     #get the table information
@@ -62,7 +62,6 @@ def scrape():
     mars_table=mars_data.set_index("Description")
     marsdata = mars_table.to_html(classes='marsdata')
     marsdata=marsdata.replace('\n', ' ')
-    marsdata
     #store in main dictionary
     mars_dict['marsdata'] = marsdata
     
@@ -91,11 +90,11 @@ def scrape():
         dictionary={"title": title , "img_url":image}
         hemisphere_image_urls.append(dictionary)
         browser.back()
-
+        # print(mars_dict)
         #store in main dictionary
     mars_dict['hemisphere_image_urls'] = hemisphere_image_urls
 
-    print(mars_dict)
+    
     # Close the browser after scraping
     browser.quit()
 

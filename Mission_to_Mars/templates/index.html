@@ -7,7 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mission to Mars</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 
 <body>
@@ -30,25 +31,34 @@
         <p>{{mars.news_p}}</p> 
       </div>
     </div>
+
+    <!--Featured Images -->
+
+    <div class="col-md-7">
+      <h3 style="font-weight:bold;font-size: 20px">Featured Mars Image</h3>
+        <img class= "figure-img img-fluid rounded" src="{{ mars.featured_image }}"" style="width:650px;height:400px;border:0;">
+        <br>
+    </div>
     
     <!--Table into-->
-    
-    <div class="col-md-12">
+
+    <div class="col-md-5">
       <h3 style="font-weight:bold;font-size: 18px">Mars Facts</h3>
        {{mars.marsdata | safe}}
        <br>
     </div>
 
-    <!--Pictures title-->
-      {% for hemi in mars.hemisphere_image_urls %}
-      <div class="col-md-6">
-          <figure class="figure">
-              <img class= "figure-img img-fluid rounded" src="{{ hemi.img_url }}"" style="width:500px;height:400px;border:0;">
-              <figcaption class="figure-caption"><h4>{{ hemi.title }}</h4></figcaption>
-          </figure>
-      </div>
-      {% endfor %}
+    <!--Hemisphere-->
+    {% for hemi in mars.hemisphere_image_urls %}
+    <div class="col-md-6">
+        <figure class="figure">
+            <img class= "figure-img img-fluid rounded" src="{{ hemi.img_url }}"" style="width:500px;height:400px;border:0;">
+            <figcaption class="figure-caption"><h4>{{ hemi.title }}</h4></figcaption>
+        </figure>
+    </div>
+    {% endfor %}
     
+  </div>
   
 </body>
 </html>
