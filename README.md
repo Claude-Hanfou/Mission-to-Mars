@@ -4,7 +4,7 @@
 ## Objective
 The goal of this project is to build a web application that scrapes various websites for data related to the Mission to Mars and displays the information in a single HTML page
 
-The following HTML were used to scrape the data 
+The following urls were used to scrape the data 
 
 * https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest
 * https://www.jpl.nasa.gov/images/spring-sprouts-on-mars/'
