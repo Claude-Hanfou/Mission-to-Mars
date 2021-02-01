@@ -1,5 +1,5 @@
 # Mission to Mars
-![alt text](https://github.com/Claude-Hanfou/Web-Scraping-Project/blob/main/Image/mars%20image.jpg width="600" height="450" "Mars")
+![alt text](https://github.com/Claude-Hanfou/Web-Scraping-Project/blob/main/Image/mars%20image.jpg "Mars")
 
 ## Objective
 The goal of this project is to build a web application that scrapes various websites for data related to the Mission to Mars and displays the information in a single HTML page
