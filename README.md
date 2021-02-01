@@ -15,7 +15,12 @@ The following HTML were used to scrape the data
 
 ### Scraping
 
-The Jupyter Notebook file called mission_to_mars.ipynb was used to complete all of the scraping and analysis tasks. The latest News Title and Paragraph Text were collected from the first url
+The Jupyter Notebook file called mission_to_mars.ipynb was used to complete all of the preliminary scraping and analysis tasks, and the scape mars python file was to convert our python script and with a function called scrape that execute all of the scraping code from jupyter notebook and return one Python dictionary containing all of the scraped data.
+
+* The latest News Title and Paragraph Text were collected from the  NASA Mars News Site  
+* The featured image was scraped from the second url,
+* Mars Facts webpage was used to scrape the table containing facts about the planet including Diameter, Mass, etc.
+* The USGS Astrogeology site was used to obtain high resolution images for each of Mar's hemispheres.
 
 ```python
 # Dependencies
@@ -125,4 +130,39 @@ def scrape():
 ```
 
 ### - MongoDB and Flask Application
+ MongoDB andFlask templating were used and a python app and an HTML page were created to display all of the information that was scraped from the URLs above.
  
+ ```from flask import Flask, render_template, redirect
+from flask_pymongo import PyMongo
+import scrape_mars
+
+app = Flask(__name__)
+
+# Use flask_pymongo to set up mongo connection
+
+mongo = PyMongo(app, uri="mongodb://localhost:27017/mars_app")
+
+# Or set inline
+# mongo = PyMongo(app, uri="mongodb://localhost:27017/craigslist_app")
+
+
+@app.route("/")
+def home():
+    mars = mongo.db.collection.find_one()
+    return render_template("index.html",  mars=mars)
+
+
+@app.route("/scrape")
+def scrape_route():
+    
+    mars_data = scrape_mars.scrape()
+    # Update the Mongo database using update and upsert=True
+    mongo.db.collection.update({}, mars_data, upsert=True)
+
+    # Redirect back to home page
+    return redirect("/",code=302)
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+    ```
