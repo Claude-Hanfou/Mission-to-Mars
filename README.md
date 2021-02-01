@@ -129,7 +129,7 @@ def scrape():
 
 ```
 
-### - MongoDB and Flask Application
+###  MongoDB and Flask Application
  MongoDB andFlask templating were used and a python app and an HTML page were created to display all of the information that was scraped from the URLs above.
  
  ```from flask import Flask, render_template, redirect
