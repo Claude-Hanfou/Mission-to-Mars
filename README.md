@@ -15,7 +15,7 @@ The following urls were used to scrape the data
 
 ### Scraping
 
-The Jupyter Notebook file called mission_to_mars.ipynb was used to complete all of the preliminary scraping and analysis tasks, and the scape mars python file was to convert our python script and with a function called scrape that execute all of the scraping code from jupyter notebook and return one Python dictionary containing all of the scraped data.
+The Jupyter Notebook file called mission_to_mars.ipynb was used to complete all of the preliminary scraping and analysis tasks, and the scrape mars python file was to convert our python script and with a function called scrape that execute all of the scraping code from jupyter notebook and return one Python dictionary containing all of the scraped data.
 
 * The latest News Title and Paragraph Text were collected from the  NASA Mars News Site  
 * The featured image was scraped from the second url,
